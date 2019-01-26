@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import MapKit
 
-class FirstViewController: UIViewController {
+class MapViewController: UIViewController {
 
+  @IBOutlet weak var mapView: MKMapView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
+  }
+  
+  override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    textToSpeech(string: "Hello, world!")
   }
 
 

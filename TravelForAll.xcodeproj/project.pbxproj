@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		3EB658CE21FCB22900F36847 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658CD21FCB22900F36847 /* AppDelegate.swift */; };
-		3EB658D021FCB22900F36847 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658CF21FCB22900F36847 /* FirstViewController.swift */; };
+		3EB658D021FCB22900F36847 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658CF21FCB22900F36847 /* MapViewController.swift */; };
 		3EB658D221FCB22900F36847 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658D121FCB22900F36847 /* SecondViewController.swift */; };
 		3EB658D521FCB22900F36847 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EB658D321FCB22900F36847 /* Main.storyboard */; };
 		3EB658D721FCB22A00F36847 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EB658D621FCB22A00F36847 /* Assets.xcassets */; };
 		3EB658DA21FCB22A00F36847 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EB658D821FCB22A00F36847 /* LaunchScreen.storyboard */; };
 		3EB658E521FCB22A00F36847 /* TravelForAllTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658E421FCB22A00F36847 /* TravelForAllTests.swift */; };
 		3EB658F021FCB22A00F36847 /* TravelForAllUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658EF21FCB22A00F36847 /* TravelForAllUITests.swift */; };
+		3EB658FE21FCB37400F36847 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658FD21FCB37400F36847 /* Utilities.swift */; };
+		3EB6590021FCBA4500F36847 /* MerchantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658FF21FCBA4500F36847 /* MerchantViewController.swift */; };
+		3EB6590221FCBB1300F36847 /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB6590121FCBB1300F36847 /* MockLocationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +40,7 @@
 /* Begin PBXFileReference section */
 		3EB658CA21FCB22900F36847 /* TravelForAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelForAll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EB658CD21FCB22900F36847 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3EB658CF21FCB22900F36847 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		3EB658CF21FCB22900F36847 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3EB658D121FCB22900F36847 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3EB658D421FCB22900F36847 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EB658D621FCB22A00F36847 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +52,9 @@
 		3EB658EB21FCB22A00F36847 /* TravelForAllUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelForAllUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EB658EF21FCB22A00F36847 /* TravelForAllUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelForAllUITests.swift; sourceTree = "<group>"; };
 		3EB658F121FCB22A00F36847 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3EB658FD21FCB37400F36847 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		3EB658FF21FCBA4500F36847 /* MerchantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantViewController.swift; sourceTree = "<group>"; };
+		3EB6590121FCBB1300F36847 /* MockLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +106,15 @@
 			isa = PBXGroup;
 			children = (
 				3EB658CD21FCB22900F36847 /* AppDelegate.swift */,
-				3EB658CF21FCB22900F36847 /* FirstViewController.swift */,
+				3EB658CF21FCB22900F36847 /* MapViewController.swift */,
 				3EB658D121FCB22900F36847 /* SecondViewController.swift */,
 				3EB658D321FCB22900F36847 /* Main.storyboard */,
 				3EB658D621FCB22A00F36847 /* Assets.xcassets */,
 				3EB658D821FCB22A00F36847 /* LaunchScreen.storyboard */,
 				3EB658DB21FCB22A00F36847 /* Info.plist */,
+				3EB658FD21FCB37400F36847 /* Utilities.swift */,
+				3EB658FF21FCBA4500F36847 /* MerchantViewController.swift */,
+				3EB6590121FCBB1300F36847 /* MockLocationService.swift */,
 			);
 			path = TravelForAll;
 			sourceTree = "<group>";
@@ -259,9 +268,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EB6590221FCBB1300F36847 /* MockLocationService.swift in Sources */,
 				3EB658D221FCB22900F36847 /* SecondViewController.swift in Sources */,
 				3EB658CE21FCB22900F36847 /* AppDelegate.swift in Sources */,
-				3EB658D021FCB22900F36847 /* FirstViewController.swift in Sources */,
+				3EB6590021FCBA4500F36847 /* MerchantViewController.swift in Sources */,
+				3EB658FE21FCB37400F36847 /* Utilities.swift in Sources */,
+				3EB658D021FCB22900F36847 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
