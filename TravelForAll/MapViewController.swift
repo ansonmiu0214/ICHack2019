@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import AudioToolbox
 
 class MapViewController: UIViewController, MKMapViewDelegate {
 
@@ -17,6 +18,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
   
   var coordFrom: CLLocationCoordinate2D? = nil
   var navigateTo: Merchant? = nil
+  var directionInstructions: [String] = []
+  var directionCount: Int = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,12 +64,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     directions.calculate { [unowned self] response, error in
       guard let unwrappedResponse = response else { return }
       
+      // Update route directions
+      self.directionInstructions = []
+      self.directionCount = 0
+    
+      unwrappedResponse.routes.forEach { route in
+        route.steps.forEach { step in
+          let instruction = step.instructions
+          print(instruction)
+          
+          self.directionInstructions.append(instruction)
+        }
+      }
       
       for route in unwrappedResponse.routes {
         self.mapView.addOverlay(route.polyline)
         self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
       }
       
+      self.speaker.textToSpeech("I will now take you to \(merchant.name). Shake your device for further instructions.")
     }
   }
   
@@ -77,7 +93,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
   }
   
   override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-    Speaker().textToSpeech("Hello, world!", nil)
+    AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) { [unowned self] in
+//      if self.directionCount == self.directionInstructions.count {
+        self.speaker.textToSpeech("You have arrived. Start shopping.")
+        self.tabBarController?.selectedIndex += 1
+        return
+//      }
+//
+//      self.speaker.textToSpeech(self.directionInstructions[self.directionCount])
+//      self.directionCount += 1
+    }
   }
 
 

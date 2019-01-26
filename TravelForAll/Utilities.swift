@@ -13,7 +13,7 @@ typealias Action = () -> ()
 
 class Speaker: NSObject, AVSpeechSynthesizerDelegate {
   
-  let rateFactor: Float = 0.75
+  let rateFactor: Float = 1.2
   let synth: AVSpeechSynthesizer
   var completionHandler: (() -> ())? = nil
   

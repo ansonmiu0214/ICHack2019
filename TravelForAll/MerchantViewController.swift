@@ -27,7 +27,11 @@ class MerchantViewController: UIViewController {
     view.addGestureRecognizer(tap)
   }
   
-  @objc func doubleTapped() {
+  @objc func doubleTapped(gesture: UITapGestureRecognizer) {
+    
+    
+    
+    
     if !handleTapResonse { return }
     
     speaker.textToSpeech("You double tapped!") { [unowned self] in
@@ -37,25 +41,25 @@ class MerchantViewController: UIViewController {
       
       mapVC.navigateTo = self.nearbyMerchants[0]
       
-      self.tabBarController?.selectedIndex = 1
+      self.tabBarController?.selectedIndex += 1
     }
   }
   
   override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-  
-    let merchantCount = nearbyMerchants.count
+    let merchantCount = self.nearbyMerchants.count
     if merchantCount == 0 {
-      speaker.textToSpeech("There are no nearby merchants.")
+      self.speaker.textToSpeech("There are no nearby merchants.")
     } else {
-      speaker.textToSpeech("There are \(merchantCount) nearby merchants.")
-      for merchant in nearbyMerchants {
-        speaker.textToSpeech(merchant.toSpokenString())
+      self.speaker.textToSpeech("There are \(merchantCount) nearby merchants.")
+      for merchant in self.nearbyMerchants {
+        self.speaker.textToSpeech(merchant.toSpokenString())
       }
       
-      speaker.textToSpeech("To get directions to your nearest merchant, double tap.") { [unowned self] in
+      self.speaker.textToSpeech("To get directions to your nearest merchant, double tap.") { [unowned self] in
         self.handleTapResonse = true
       }
     }
+  
     
   }
   
