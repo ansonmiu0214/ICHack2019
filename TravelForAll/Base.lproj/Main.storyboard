@@ -21,6 +21,9 @@
                         <viewLayoutGuide key="safeArea" id="GT5-jj-TSw"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Merchants" id="xRJ-kI-Nrl"/>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="show" identifier="merchantToMap" id="Doc-k1-Nm8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zgU-z1-3Vf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -117,4 +120,7 @@
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Doc-k1-Nm8"/>
+    </inferredMetricsTieBreakers>
 </document>
