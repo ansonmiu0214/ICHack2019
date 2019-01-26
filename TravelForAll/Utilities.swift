@@ -23,7 +23,7 @@ class Speaker: NSObject, AVSpeechSynthesizerDelegate {
     synth.delegate = self
   }
   
-  func textToSpeech(_ string: String, _ completion: Action?) {
+  func textToSpeech(_ string: String, _ completion: Action? = nil) {
     completionHandler = completion
     
     let utterance = AVSpeechUtterance(string: string)
