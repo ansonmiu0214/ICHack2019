@@ -21,7 +21,7 @@ class MapViewController: UIViewController {
   }
   
   override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-    textToSpeech(string: "Hello, world!")
+    Speaker().textToSpeech("Hello, world!", nil)
   }
 
 
