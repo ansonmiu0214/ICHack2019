@@ -37,7 +37,7 @@ struct Merchant: Spoken {
   }
   
   func toSpokenString() -> String {
-    return "This is a merchant named \(self.name) which is \(self.walkMinutes) minutes away from you."
+    return "\(self.name) is \(self.walkMinutes) minutes away from you."
   }
   
 }
