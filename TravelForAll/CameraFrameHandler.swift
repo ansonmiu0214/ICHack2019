@@ -88,7 +88,13 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
   }
   
   func isMoney(_ text: String) -> Bool {
-    return text[0...0]  == "$"
+    let source = text
+    let linkRegexPattern = "<[$£][0-9]+(/.[0-9]+)>"
+    let linkRegex = try! NSRegularExpression(pattern: linkRegexPattern,
+                                             options: .caseInsensitive)
+    let matches = linkRegex.matches(in: source,
+                                    range: NSMakeRange(0, source.utf16.count))
+    return matches.count == 1
   }
   
   func getMoneyValue(_ text: String) -> (String, Float) {
