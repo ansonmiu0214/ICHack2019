@@ -116,10 +116,10 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
           return
         }
         
-        // If previously seen, ignore
-//        if self.lastSeen == value {
-//          return
-//        }
+//         If previously seen, ignore
+        if self.lastSeen == value && disabledMode {
+          return
+        }
         
         // Convert to home value
         let homePrice = getHomePrice(currency: currency, value: value)
