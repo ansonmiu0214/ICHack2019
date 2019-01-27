@@ -9,28 +9,39 @@
 import UIKit
 import AVKit
 
-class ShoppingViewController: UIViewController {
+class ShoppingViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
   var captureSession: AVCaptureSession?
   var videoPreviewLayer: AVCaptureVideoPreviewLayer?
 
   var frameDelegate: CameraFrameHandler? = nil
   
+  var enable = false
+  
   @IBOutlet weak var viewFinder: UIView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    print("Camera loaded")
+    
+    let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+    tap.numberOfTapsRequired = 1
+    viewFinder.addGestureRecognizer(tap)
     
     askForCameraPermissions { [unowned self] granted in
       if !granted {
+        print("No camera permission")
         return
       }
       
       self.frameDelegate = CameraFrameHandler(responseDelegate: self)
-      
-      
       self.setupCaptureSession()
     }
+  }
+  
+  @objc func doubleTapped(gesture: UITapGestureRecognizer) {
+    enable = true
   }
   
   func askForCameraPermissions(_ completion: @escaping (Bool) -> Void) {
@@ -72,21 +83,104 @@ class ShoppingViewController: UIViewController {
     }
     
     captureSession = AVCaptureSession()
+    
+    captureSession?.sessionPreset = AVCaptureSession.Preset.photo
+    
     captureSession?.addInput(cameraInput)
+    
+//    configureVideoOrientation()
     
     videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
     videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
     videoPreviewLayer?.frame = view.layer.bounds
+
+    if let connection = videoPreviewLayer?.connection {
+      connection.videoOrientation = .portrait
+    } else {
+      print("Error: orientation")
+    }
+
     viewFinder.layer.addSublayer(videoPreviewLayer!)
     
     // Add delegate
     let videoOutput = AVCaptureVideoDataOutput()
+    videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
     videoOutput.setSampleBufferDelegate(frameDelegate, queue: DispatchQueue(label: "frame buffer"))
+    
+//    videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: .default))
+   
     captureSession?.addOutput(videoOutput)
+    
+    print(videoOutput.connections.count)
+    
+    if let connection = videoOutput.connection(with: .video) {
+      connection.videoOrientation = .portrait
+    } else {
+      print("Error orientation")
+    }
+    
     
     captureSession?.startRunning()
   }
+  
+//  private func configureVideoOrientation() {
+//    if let preview = self.videoPreviewLayer,
+//      let connection = preview.connection {
+//      let orientation = UIDevice.current.orientation
+//
+//      if connection.isVideoOrientationSupported {
+//        var videoOrientation: AVCaptureVideoOrientation
+//        switch orientation {
+//        case .portrait:
+//          videoOrientation = .portrait
+//        case .portraitUpsideDown:
+//          videoOrientation = .portraitUpsideDown
+//        case .landscapeLeft:
+//          videoOrientation = .landscapeRight
+//        case .landscapeRight:
+//          videoOrientation = .landscapeLeft
+//        default:
+//          videoOrientation = .portrait
+//        }
+//        preview.frame = self.view.bounds
+//        connection.videoOrientation = videoOrientation
+//      }
+//    }
+//  }
+  
 
+  func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    if !enable {
+      return
+    }
+    
+    let img = imageFromSampleBuffer(sampleBuffer: sampleBuffer)
+    guard let unwrapped = img else {
+      print("Cannot recognise image")
+      enable = false
+      return
+    }
+    
+    DispatchQueue.main.sync { [unowned self] in
+      let imgView = UIImageView(image: unwrapped)
+      self.viewFinder.addSubview(imgView)
+      self.enable = false
+    }
+    
+    
+//    view.addSubview(imageview)
+    
+    
+  }
+  
+  private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
+    guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
+    let ciImage = CIImage(cvPixelBuffer: imageBuffer)
+    let context = CIContext()
+    guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
+    return UIImage(cgImage: cgImage)
+  }
+  
 
 }
 
