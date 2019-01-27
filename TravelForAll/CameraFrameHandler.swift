@@ -32,15 +32,11 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
   init(responseDelegate: ResponseDataHandler) {
     self.responseDelegate = responseDelegate
     super.init()
-
   }
   
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-//    print("Got a frame!")
 
-//    if !responseDelegate.enable || isProcessing {
     if isProcessing {
-//      print("Dropping frame")
       return
     }
     
@@ -75,9 +71,7 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
   
   func processResult(_ visionImage: VisionImage, from text: VisionText?, error: Error?) {
     // Extract all detected text
-    guard let text = text else {
-      return
-    }
+    guard let text = text else { return }
     
     let detectedTexts = text.blocks.map { $0.text }
     
@@ -96,8 +90,7 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
     
     // Check photo for object
     DispatchQueue.global(qos: .background).sync { [unowned self] in
-      self.labeler.process(visionImage) {
-        labels, error in
+      self.labeler.process(visionImage) { labels, error in
         guard error == nil, let labels = labels else { return }
       
         var objectLabel = "Object"
@@ -113,9 +106,9 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
         }
         
         // If previously seen, ignore
-        if self.lastSeen == value {
-          return
-        }
+//        if self.lastSeen == value {
+//          return
+//        }
         
         // Convert to home value
         let homePrice = getHomePrice(currency: currency, value: value)

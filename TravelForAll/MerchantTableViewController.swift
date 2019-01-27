@@ -26,9 +26,7 @@ class MerchantTableViewController: UITableViewController {
     tap.numberOfTapsRequired = 2
     view.addGestureRecognizer(tap)
     
-    if disabledMode {
-      helpSpeech()
-    }
+    if disabledMode { helpSpeech() }
   }
   
   func helpSpeech() {
