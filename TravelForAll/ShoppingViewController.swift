@@ -27,9 +27,9 @@ class ShoppingViewController: UIViewController, AVCaptureVideoDataOutputSampleBu
     // Do any additional setup after loading the view, typically from a nib.
     print("Camera loaded")
     
-    let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
-    tap.numberOfTapsRequired = 1
-    viewFinder.addGestureRecognizer(tap)
+//    let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+//    tap.numberOfTapsRequired = 1
+//    viewFinder.addGestureRecognizer(tap)
     
     askForCameraPermissions { [unowned self] granted in
       if !granted {

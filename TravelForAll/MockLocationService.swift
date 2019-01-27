@@ -12,7 +12,8 @@ import CoreLocation
 class MockLocationService {
   
   func getCurrentLocation() -> CLLocationCoordinate2D {
-    return CLLocationCoordinate2D(latitude: 37.7762, longitude: -122.4458)
+//    return CLLocationCoordinate2D(latitude: 37.7762, longitude: -122.4458)
+    return CLLocationCoordinate2D(latitude: 51.4981, longitude: -0.1773)
   }
   
 }

@@ -13,17 +13,28 @@ typealias Action = () -> ()
 
 var disabledMode = false
 
-let homeCurrency = "£"
+//let homeCurrency = "£"
+//let currencyToString = [
+//  "$": "dollars", // TODO also depend on locale (US dollars vs HK dollars vs Australian dollars)
+//  "£": "Stirling pounds",
+//  "¥": "Japanese yen",
+//  "€": "Euro"
+//]
+
+let currentCity = "London"
+
+let homeCurrency = "$"
 let currencyToString = [
-  "$": "dollars", // TODO also depend on locale (US dollars vs HK dollars vs Australian dollars)
+  "$": "Hong Kong dollars", // TODO also depend on locale (US dollars vs HK dollars vs Australian dollars)
   "£": "Stirling pounds",
   "¥": "Japanese yen",
   "€": "Euro"
 ]
 
+
 class Speaker: NSObject, AVSpeechSynthesizerDelegate {
   
-  let rateFactor: Float = 1.2
+  let rateFactor: Float = 1
   let synth: AVSpeechSynthesizer
   var completionHandler: (() -> ())? = nil
   

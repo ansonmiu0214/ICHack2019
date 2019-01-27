@@ -14,6 +14,8 @@ class AboutController: UIViewController {
   
   @IBOutlet weak var paragraphs: UILabel!
   
+  let speaker = Speaker()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     paragraphs.frame = CGRect(x: 0,y: 0,width: 300,height: 500);
@@ -25,5 +27,9 @@ class AboutController: UIViewController {
 
     
     }
+  
+  override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    speaker.textToSpeech(paragraphs.text!)
+  }
 
 }

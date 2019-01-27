@@ -60,7 +60,7 @@ class MerchantTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Nearby Merchants"
+    return "Nearby Supermarkets"
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,6 +72,7 @@ class MerchantTableViewController: UITableViewController {
     
     cell.minuteLabel.text = "\(merchant.walkMinutes)"
     cell.detailLabel.text = merchant.name
+    cell.addressLabel.text = merchant.address
     
     return cell
   }

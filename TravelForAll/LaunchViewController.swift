@@ -46,6 +46,11 @@ class LaunchViewController: UIViewController, UIGestureRecognizerDelegate {
     let aboutGesture = UITapGestureRecognizer(target: self, action: #selector(goToAbout))
     aboutGesture.delegate = self
     toAbout.addGestureRecognizer(aboutGesture)
+    
+    // Double tap gesture recogniser
+    let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+    tap.numberOfTapsRequired = 2
+    view.addGestureRecognizer(tap)
   }
   
   @objc func doubleTapped(gesture: UITapGestureRecognizer) {
@@ -95,7 +100,6 @@ class LaunchViewController: UIViewController, UIGestureRecognizerDelegate {
   override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
     disabledMode = true
     
-    let currentCity = "San Francisco"
     speaker.textToSpeech("Welcome to \(currentCity).")
     speaker.textToSpeech("Press the top left for your travel currency calculator.")
     speaker.textToSpeech("Press the top right to find nearby supermarkets.")

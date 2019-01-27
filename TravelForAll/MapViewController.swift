@@ -19,7 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
   var coordFrom: CLLocationCoordinate2D? = nil
   var navigateTo: Merchant? = nil
   var directionInstructions: [String] = []
-  var directionCount: Int = 0
+  var directionCount: Int = 1
   
   override func viewDidLoad() {
     super.viewDidLoad()
