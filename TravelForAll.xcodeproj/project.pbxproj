@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E3F3CDD21FD522200D5D3F6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F3CDC21FD522200D5D3F6 /* LaunchViewController.swift */; };
+		3E3F3CDF21FD5B0A00D5D3F6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F3CDE21FD5B0A00D5D3F6 /* MainTabBarController.swift */; };
+		3E3F3CE121FD60E900D5D3F6 /* MerchantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F3CE021FD60E900D5D3F6 /* MerchantTableViewController.swift */; };
+		3E3F3CE321FD646700D5D3F6 /* MerchantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F3CE221FD646700D5D3F6 /* MerchantCell.swift */; };
+		3E3F3CE521FD78EA00D5D3F6 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F3CE421FD78EA00D5D3F6 /* AboutController.swift */; };
 		3E80C65A21FD0D1300C59FF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E80C65921FD0D1200C59FF6 /* GoogleService-Info.plist */; };
 		3EB658CE21FCB22900F36847 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658CD21FCB22900F36847 /* AppDelegate.swift */; };
 		3EB658D021FCB22900F36847 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB658CF21FCB22900F36847 /* MapViewController.swift */; };
@@ -50,6 +55,11 @@
 		29909B154D5E72BD3919AE53 /* Pods_TravelForAllTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelForAllTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D6DF119187648FD0CB14EC8 /* Pods-TravelForAll.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelForAll.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelForAll/Pods-TravelForAll.debug.xcconfig"; sourceTree = "<group>"; };
 		2FB2BB087D7D7049C736DD62 /* Pods-TravelForAllTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelForAllTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelForAllTests/Pods-TravelForAllTests.release.xcconfig"; sourceTree = "<group>"; };
+		3E3F3CDC21FD522200D5D3F6 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		3E3F3CDE21FD5B0A00D5D3F6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		3E3F3CE021FD60E900D5D3F6 /* MerchantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantTableViewController.swift; sourceTree = "<group>"; };
+		3E3F3CE221FD646700D5D3F6 /* MerchantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantCell.swift; sourceTree = "<group>"; };
+		3E3F3CE421FD78EA00D5D3F6 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		3E80C65921FD0D1200C59FF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3EB658CA21FCB22900F36847 /* TravelForAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelForAll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EB658CD21FCB22900F36847 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +151,11 @@
 				3EB6590121FCBB1300F36847 /* MockLocationService.swift */,
 				3EB6590321FCC09300F36847 /* Services.swift */,
 				3EB6590521FCFE0D00F36847 /* CameraFrameHandler.swift */,
+				3E3F3CDC21FD522200D5D3F6 /* LaunchViewController.swift */,
+				3E3F3CDE21FD5B0A00D5D3F6 /* MainTabBarController.swift */,
+				3E3F3CE021FD60E900D5D3F6 /* MerchantTableViewController.swift */,
+				3E3F3CE221FD646700D5D3F6 /* MerchantCell.swift */,
+				3E3F3CE421FD78EA00D5D3F6 /* AboutController.swift */,
 			);
 			path = TravelForAll;
 			sourceTree = "<group>";
@@ -430,14 +445,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3F3CE121FD60E900D5D3F6 /* MerchantTableViewController.swift in Sources */,
 				3EB6590221FCBB1300F36847 /* MockLocationService.swift in Sources */,
 				3EB658D221FCB22900F36847 /* ShoppingViewController.swift in Sources */,
+				3E3F3CDF21FD5B0A00D5D3F6 /* MainTabBarController.swift in Sources */,
 				3EB6590421FCC09300F36847 /* Services.swift in Sources */,
 				3EB658CE21FCB22900F36847 /* AppDelegate.swift in Sources */,
 				3EB6590021FCBA4500F36847 /* MerchantViewController.swift in Sources */,
 				3EB6590621FCFE0D00F36847 /* CameraFrameHandler.swift in Sources */,
 				3EB658FE21FCB37400F36847 /* Utilities.swift in Sources */,
+				3E3F3CDD21FD522200D5D3F6 /* LaunchViewController.swift in Sources */,
 				3EB658D021FCB22900F36847 /* MapViewController.swift in Sources */,
+				3E3F3CE321FD646700D5D3F6 /* MerchantCell.swift in Sources */,
+				3E3F3CE521FD78EA00D5D3F6 /* AboutController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,31 +38,38 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 //      return
 //    }
     
-    guard var merchant = navigateTo else {
+    guard let merchant = navigateTo else {
       print("MERCHANT is nil")
       return
     }
     
-    speaker.textToSpeech("Computing directions to \(merchant.name).")
+    if disabledMode { speaker.textToSpeech("Computing directions to \(merchant.name).") }
     
     // Setup request
     let request  = MKDirections.Request()
     
-    let testFrom = CLLocationCoordinate2D(latitude: 51.4944, longitude: -0.1827)
-    let testTo = CLLocationCoordinate2D(latitude: 51.4988, longitude: -0.1749)
+//    let testFrom = CLLocationCoordinate2D(latitude: 51.4944, longitude: -0.1827)
+//    let testTo = CLLocationCoordinate2D(latitude: 51.4988, longitude: -0.1749)
     
-    let from = testFrom
-    let to = testTo
+    let from = getLocationService().getCurrentLocation()
+    let to = merchant.coord
+    
+    print(from)
+    print(merchant.coord)
     
     request.source = MKMapItem(placemark: MKPlacemark(coordinate: from))
     request.destination = MKMapItem(placemark: MKPlacemark(coordinate: to))
     
+//    request.transportType = .walking
     request.transportType = .walking
     
     let directions = MKDirections(request: request)
     
     directions.calculate { [unowned self] response, error in
-      guard let unwrappedResponse = response else { return }
+      guard let unwrappedResponse = response else {
+        print(error)
+        return
+      }
       
       // Update route directions
       self.directionInstructions = []
@@ -82,7 +89,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
       }
       
-      self.speaker.textToSpeech("I will now take you to \(merchant.name). Shake your device for further instructions.")
+      if disabledMode { self.speaker.textToSpeech("I will now take you to \(merchant.name). Shake your device for further instructions.") }
     }
   }
   
@@ -93,19 +100,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
   }
   
   override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    if !disabledMode { return }
+    
     AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) { [unowned self] in
-//      if self.directionCount == self.directionInstructions.count {
+      if self.directionCount == self.directionInstructions.count {
         self.speaker.textToSpeech("You have arrived. Start shopping.")
       
         DispatchQueue.main.sync {
           self.tabBarController?.selectedIndex = 2
         }
       
-//        return
-//      }
-//
-//      self.speaker.textToSpeech(self.directionInstructions[self.directionCount])
-//      self.directionCount += 1
+        return
+      }
+
+      self.speaker.textToSpeech(self.directionInstructions[self.directionCount])
+      self.directionCount += 1
     }
   }
 
