@@ -46,6 +46,8 @@ class MerchantViewController: UIViewController {
   }
   
   override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    disabledMode = true
+    
     let merchantCount = self.nearbyMerchants.count
     if merchantCount == 0 {
       self.speaker.textToSpeech("There are no nearby merchants.")

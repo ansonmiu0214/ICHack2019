@@ -17,6 +17,20 @@ protocol Spoken {
   func toSpokenString() -> String
 }
 
+let currencyToRate: [String:Float] = [
+  "$": 0.78,
+  "£": 1,
+  "¥": 0.01
+]
+
+func getHomePrice(currency: String, value: Float) -> Float? {
+  if let rate = currencyToRate[currency] {
+    return round(value * rate * 100) / 100
+  }
+  
+  return nil
+}
+
 func getMerchants() -> [Merchant] {
   return [
     Merchant(name: "Starbucks", address: "", walkMinutes: 2),

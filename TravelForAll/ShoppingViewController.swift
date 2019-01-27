@@ -11,6 +11,8 @@ import AVKit
 
 class ShoppingViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
+  let speaker = Speaker()
+  
   var captureSession: AVCaptureSession?
   var videoPreviewLayer: AVCaptureVideoPreviewLayer?
 
@@ -185,5 +187,30 @@ class ShoppingViewController: UIViewController, AVCaptureVideoDataOutputSampleBu
 }
 
 extension ShoppingViewController: ResponseDataHandler {
-  
+  func reportExchange(localCurrency: String, localValue: Float, homeValue: Float) {
+    
+    if disabledMode {
+      // Vibrate device
+      AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) { [unowned self] in
+        // Make speech
+        self.speaker.textToSpeech("An object was detected.")
+        self.speaker.textToSpeech("It costs \(localValue) \(currencyToString[localCurrency]!).")
+        self.speaker.textToSpeech("This is approximately \(homeValue) \(currencyToString[homeCurrency]!)")
+      }
+    } else {
+      
+      // Show UIAlert
+      
+      captureSession?.stopRunning()
+      
+      let alert = UIAlertController(title: "Object Detected", message: "Local: \(localCurrency)\(localValue) \n Home: \(homeCurrency)\(homeValue)", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default) { [unowned self] _ in
+        self.captureSession?.startRunning()
+      })
+      
+      present(alert, animated: true, completion: nil)
+    }
+    
+    
+  }
 }

@@ -11,6 +11,15 @@ import AVFoundation
 
 typealias Action = () -> ()
 
+var disabledMode = false
+
+let homeCurrency = "£"
+let currencyToString = [
+  "$": "dollars", // TODO also depend on locale (US dollars vs HK dollars vs Australian dollars)
+  "£": "Stirling pounds",
+  "¥": "Japanese yen"
+]
+
 class Speaker: NSObject, AVSpeechSynthesizerDelegate {
   
   let rateFactor: Float = 1.2

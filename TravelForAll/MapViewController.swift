@@ -96,8 +96,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) { [unowned self] in
 //      if self.directionCount == self.directionInstructions.count {
         self.speaker.textToSpeech("You have arrived. Start shopping.")
-        self.tabBarController?.selectedIndex = 0
-        return
+      
+        DispatchQueue.main.sync {
+          self.tabBarController?.selectedIndex = 2
+        }
+      
+//        return
 //      }
 //
 //      self.speaker.textToSpeech(self.directionInstructions[self.directionCount])

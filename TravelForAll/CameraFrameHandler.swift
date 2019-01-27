@@ -13,17 +13,21 @@ import FirebaseMLVision
 protocol ResponseDataHandler {
   // Pass in object and price?
   // Pass in the relevant things required for the camera view controller to render or speak
+  
+  func reportExchange(localCurrency: String, localValue: Float, homeValue: Float)
+  
 }
 
 class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
   
-  let responseDelegate: ShoppingViewController
+  let responseDelegate: ResponseDataHandler
   private lazy var vision = Vision.vision()
   private lazy var textRecognizer = vision.onDeviceTextRecognizer()
   
+  var lastSeen: Float = 0
   var isProcessing = false
   
-  init(responseDelegate: ShoppingViewController) {
+  init(responseDelegate: ResponseDataHandler) {
     self.responseDelegate = responseDelegate
     super.init()
 
@@ -38,9 +42,11 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
       return
     }
     
+    isProcessing = true
     if let image = imageFromSampleBuffer(sampleBuffer: sampleBuffer) {
-      isProcessing = true
       runTextRecognition(with: image)
+    } else {
+      isProcessing = false
     }
     
   }
@@ -62,47 +68,70 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
         self.processResult(from: features, error: error)
         
         self.isProcessing = false
-        self.responseDelegate.enable = false
       }
     }
   }
   
   func processResult(from text: VisionText?, error: Error?) {
-    print("**Result start**")
-    text?.blocks.forEach { block in
-      block.lines.forEach { line in
-//        print(line.text)
-        line.elements.forEach { element in
-          let text = element.text
-          
-          if isMoney(text) {
-            let (currency, value) = getMoneyValue(text)
-            print(value)
-          }
-          
-//          print(element.text)
-        }
-      }
+    // Extract all detected text
+    guard let text = text else {
+      return
     }
-    print("**Result end**")
+    
+    let detectedTexts = text.blocks.map { $0.text }
+    
+    // Check whether there are money records
+    let moneyTexts = detectedTexts.filter { isMoney($0) }
+    
+    // Make sure only 1 (if more than one, the user is not close enough)
+    if moneyTexts.count != 1 { return }
+    
+    // Extract monetary value
+    let moneyValue = getMoneyValue(moneyTexts[0])
+    
+    guard let (currency, value) = moneyValue else {
+      return
+    }
+    
+    // If previously seen, ignore
+    if lastSeen == value {
+      return
+    }
+    
+    // Convert to home value
+    let homePrice = getHomePrice(currency: currency, value: value)
+    
+    guard let homeValue = homePrice else {
+      return
+    }
+    
+    // Update last seen
+    lastSeen = value
+    
+    responseDelegate.reportExchange(localCurrency: currency, localValue: value, homeValue: homeValue)
   }
   
-  func isMoney(_ text: String) -> Bool {
+  private func isMoney(_ text: String) -> Bool {
     let source = text
-    let linkRegexPattern = "<[$£][0-9]+(/.[0-9]+)>"
+    let linkRegexPattern = "[$£¥][0-9]+(\\.[0-9]+)?"
     let linkRegex = try! NSRegularExpression(pattern: linkRegexPattern,
                                              options: .caseInsensitive)
     let matches = linkRegex.matches(in: source,
                                     range: NSMakeRange(0, source.utf16.count))
+    
     return matches.count == 1
   }
   
-  func getMoneyValue(_ text: String) -> (String, Float) {
+  private func getMoneyValue(_ text: String) -> (String, Float)? {
+    print(text)
     let end = text.count
-    return (text[0...0], Float(text[1..<end])!)
+    
+    guard let value = Float(text[1..<end]) else {
+      return nil
+    }
+    
+    return (text[0...0], value)
   }
-
-  
   
 }
 
