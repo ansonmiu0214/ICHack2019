@@ -17,7 +17,8 @@ let homeCurrency = "£"
 let currencyToString = [
   "$": "dollars", // TODO also depend on locale (US dollars vs HK dollars vs Australian dollars)
   "£": "Stirling pounds",
-  "¥": "Japanese yen"
+  "¥": "Japanese yen",
+  "€": "Euro"
 ]
 
 class Speaker: NSObject, AVSpeechSynthesizerDelegate {

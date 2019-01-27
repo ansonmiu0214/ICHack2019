@@ -20,7 +20,8 @@ protocol Spoken {
 let currencyToRate: [String:Float] = [
   "$": 0.78,
   "£": 1,
-  "¥": 0.01
+  "¥": 0.01,
+  "€": 0.89
 ]
 
 func getHomePrice(currency: String, value: Float) -> Float? {

@@ -187,13 +187,13 @@ class ShoppingViewController: UIViewController, AVCaptureVideoDataOutputSampleBu
 }
 
 extension ShoppingViewController: ResponseDataHandler {
-  func reportExchange(localCurrency: String, localValue: Float, homeValue: Float) {
+  func reportExchange(objectLabel: String, localCurrency: String, localValue: Float, homeValue: Float) {
     
     if disabledMode {
       // Vibrate device
       AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) { [unowned self] in
         // Make speech
-        self.speaker.textToSpeech("An object was detected.")
+        self.speaker.textToSpeech("Detected: \(objectLabel)")
         self.speaker.textToSpeech("It costs \(localValue) \(currencyToString[localCurrency]!).")
         self.speaker.textToSpeech("This is approximately \(homeValue) \(currencyToString[homeCurrency]!)")
       }
@@ -203,7 +203,7 @@ extension ShoppingViewController: ResponseDataHandler {
       
       captureSession?.stopRunning()
       
-      let alert = UIAlertController(title: "Object Detected", message: "Local: \(localCurrency)\(localValue) \n Home: \(homeCurrency)\(homeValue)", preferredStyle: .alert)
+      let alert = UIAlertController(title: "Detected: \(objectLabel)", message: "Local: \(localCurrency)\(localValue) \n Home: \(homeCurrency)\(homeValue)", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default) { [unowned self] _ in
         self.captureSession?.startRunning()
       })

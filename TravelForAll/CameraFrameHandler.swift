@@ -14,7 +14,7 @@ protocol ResponseDataHandler {
   // Pass in object and price?
   // Pass in the relevant things required for the camera view controller to render or speak
   
-  func reportExchange(localCurrency: String, localValue: Float, homeValue: Float)
+  func reportExchange(objectLabel: String, localCurrency: String, localValue: Float, homeValue: Float)
   
 }
 
@@ -23,6 +23,8 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
   let responseDelegate: ResponseDataHandler
   private lazy var vision = Vision.vision()
   private lazy var textRecognizer = vision.onDeviceTextRecognizer()
+  private lazy var labeler = vision.onDeviceImageLabeler()
+
   
   var lastSeen: Float = 0
   var isProcessing = false
@@ -63,16 +65,15 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
   func runTextRecognition(with image: UIImage) {
     let visionImage = VisionImage(image: image)
 
-    DispatchQueue.global(qos: .background).async { [unowned self] in
+    DispatchQueue.global(qos: .background).sync { [unowned self] in
       self.textRecognizer.process(visionImage) { features, error in
-        self.processResult(from: features, error: error)
-        
+        self.processResult(visionImage, from: features, error: error)
         self.isProcessing = false
       }
     }
   }
   
-  func processResult(from text: VisionText?, error: Error?) {
+  func processResult(_ visionImage: VisionImage, from text: VisionText?, error: Error?) {
     // Extract all detected text
     guard let text = text else {
       return
@@ -93,22 +94,45 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
       return
     }
     
-    // If previously seen, ignore
-    if lastSeen == value {
-      return
+    // Check photo for object
+    DispatchQueue.global(qos: .background).sync { [unowned self] in
+      self.labeler.process(visionImage) {
+        labels, error in
+        guard error == nil, let labels = labels else { return }
+      
+        var objectLabel = "Object"
+        var maxConfidence: NSNumber = 0
+        
+        for label in labels {
+          if let localConfidence = label.confidence {
+            if localConfidence.compare(maxConfidence) == ComparisonResult.orderedDescending {
+              objectLabel = label.text
+              maxConfidence = localConfidence
+            }
+          }
+        }
+        
+        // If previously seen, ignore
+        if self.lastSeen == value {
+          return
+        }
+        
+        // Convert to home value
+        let homePrice = getHomePrice(currency: currency, value: value)
+        
+        guard let homeValue = homePrice else {
+          return
+        }
+        
+        // Update last seen
+        self.lastSeen = value
+        
+        self.responseDelegate.reportExchange(objectLabel: objectLabel, localCurrency: currency, localValue: value, homeValue: homeValue)
+      }
+      
     }
     
-    // Convert to home value
-    let homePrice = getHomePrice(currency: currency, value: value)
     
-    guard let homeValue = homePrice else {
-      return
-    }
-    
-    // Update last seen
-    lastSeen = value
-    
-    responseDelegate.reportExchange(localCurrency: currency, localValue: value, homeValue: homeValue)
   }
   
   private func isMoney(_ text: String) -> Bool {
