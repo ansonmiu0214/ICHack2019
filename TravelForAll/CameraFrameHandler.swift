@@ -24,7 +24,8 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
   private lazy var vision = Vision.vision()
   private lazy var textRecognizer = vision.onDeviceTextRecognizer()
   private lazy var labeler = vision.onDeviceImageLabeler()
-
+  
+  let rulebasedBlacklist = Set(["Musical instrument", "Desk", "Space", "Room", "Tableware"])
   
   var lastSeen: Float = 0
   var isProcessing = false
@@ -93,16 +94,26 @@ class CameraFrameHandler: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
       self.labeler.process(visionImage) { labels, error in
         guard error == nil, let labels = labels else { return }
       
-        var objectLabel = "Object"
+        var objectLabel = ""
         var maxConfidence: NSNumber = 0
         
         for label in labels {
+          
+          if self.rulebasedBlacklist.contains(label.text) {
+            continue
+          }
+          
+          print("\(label.text) :: \(label.confidence!)")
           if let localConfidence = label.confidence {
             if localConfidence.compare(maxConfidence) == ComparisonResult.orderedDescending {
               objectLabel = label.text
               maxConfidence = localConfidence
             }
           }
+        }
+        
+        if objectLabel == "" {
+          return
         }
         
         // If previously seen, ignore

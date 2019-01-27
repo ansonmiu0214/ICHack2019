@@ -98,7 +98,7 @@
                             <outlet property="delegate" destination="keF-cC-fah" id="sE5-wc-Kqd"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Merchants" image="iconmerchant" id="IEA-VS-EqC"/>
+                    <tabBarItem key="tabBarItem" title="Merchants" image="iconmerchanttrans" id="IEA-VS-EqC"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tvW-do-ulR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -141,7 +141,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Explore" image="iconmap" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Explore" image="iconmaptrans" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="mapView" destination="s64-Gx-gu2" id="ofW-9j-uAh"/>
                     </connections>
@@ -220,7 +220,7 @@ travelling experience of our travellers by providing real-time price-tag scannin
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Store" image="iconcam" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Store" image="iconcamtrans" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="viewFinder" destination="e7o-I6-1a3" id="KlJ-Lc-bWt"/>
                     </connections>
@@ -252,11 +252,16 @@ travelling experience of our travellers by providing real-time price-tag scannin
                                 <rect key="frame" x="273" y="563" width="94" height="98"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBt-66-rhI">
+                                <rect key="frame" x="5" y="563" width="94" height="98"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="okp-pP-A4p" firstAttribute="leading" secondItem="Da0-Jj-5b4" secondAttribute="trailing" constant="-178" id="52O-bK-r7Q"/>
                             <constraint firstItem="Da0-Jj-5b4" firstAttribute="top" secondItem="y2f-hE-ygx" secondAttribute="top" id="7w7-f5-7GU"/>
+                            <constraint firstItem="fBt-66-rhI" firstAttribute="leading" secondItem="y2f-hE-ygx" secondAttribute="leading" constant="5" id="EIQ-On-BCk"/>
                             <constraint firstAttribute="trailing" secondItem="okp-pP-A4p" secondAttribute="trailing" id="HFR-4V-Z3h"/>
                             <constraint firstItem="Da0-Jj-5b4" firstAttribute="width" secondItem="okp-pP-A4p" secondAttribute="height" multiplier="170:667" id="Khe-eE-IX9"/>
                             <constraint firstItem="y2f-hE-ygx" firstAttribute="bottom" secondItem="alM-ra-slv" secondAttribute="bottom" constant="6" id="Rqu-eR-GwT"/>
@@ -265,10 +270,13 @@ travelling experience of our travellers by providing real-time price-tag scannin
                             <constraint firstItem="vHD-vS-grs" firstAttribute="bottom" secondItem="Da0-Jj-5b4" secondAttribute="bottom" id="Syl-Ld-dAs"/>
                             <constraint firstItem="vHD-vS-grs" firstAttribute="top" secondItem="Da0-Jj-5b4" secondAttribute="top" id="WEr-w8-zRo"/>
                             <constraint firstItem="okp-pP-A4p" firstAttribute="top" secondItem="eRR-KJ-k6d" secondAttribute="top" id="eCh-G2-WyJ"/>
+                            <constraint firstItem="fBt-66-rhI" firstAttribute="top" secondItem="okp-pP-A4p" secondAttribute="bottom" constant="-104" id="eqU-WK-sY0"/>
+                            <constraint firstItem="fBt-66-rhI" firstAttribute="centerY" secondItem="alM-ra-slv" secondAttribute="centerY" id="h6M-SV-tDR"/>
                             <constraint firstItem="alM-ra-slv" firstAttribute="leading" secondItem="okp-pP-A4p" secondAttribute="trailing" constant="-102" id="iM4-7t-fDI"/>
                             <constraint firstItem="vHD-vS-grs" firstAttribute="leading" secondItem="okp-pP-A4p" secondAttribute="trailing" constant="-178" id="kgk-T9-rc6"/>
                             <constraint firstItem="okp-pP-A4p" firstAttribute="bottom" secondItem="y2f-hE-ygx" secondAttribute="bottom" id="lm1-kh-Q0x"/>
                             <constraint firstItem="okp-pP-A4p" firstAttribute="leading" secondItem="eRR-KJ-k6d" secondAttribute="leading" id="oge-3q-PsN"/>
+                            <constraint firstItem="okp-pP-A4p" firstAttribute="leading" secondItem="fBt-66-rhI" secondAttribute="trailing" constant="-99" id="rS9-mO-DVq"/>
                             <constraint firstItem="alM-ra-slv" firstAttribute="top" secondItem="okp-pP-A4p" secondAttribute="bottom" constant="-104" id="vP7-Jn-ZBp"/>
                             <constraint firstItem="vHD-vS-grs" firstAttribute="width" secondItem="okp-pP-A4p" secondAttribute="height" multiplier="170:667" id="vQK-5L-VEp"/>
                             <constraint firstItem="okp-pP-A4p" firstAttribute="top" secondItem="vHD-vS-grs" secondAttribute="bottom" constant="-180" id="xtW-7j-y83"/>
@@ -280,6 +288,7 @@ travelling experience of our travellers by providing real-time price-tag scannin
                         <outlet property="toAbout" destination="alM-ra-slv" id="5Nn-ww-1aE"/>
                         <outlet property="toMerchants" destination="vHD-vS-grs" id="tZ7-qs-Wk7"/>
                         <outlet property="toMoney" destination="Da0-Jj-5b4" id="BBG-WO-ccf"/>
+                        <outlet property="toSettings" destination="fBt-66-rhI" id="aMG-YP-wT1"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="segueToTab" id="rse-fT-5VF"/>
                         <segue destination="1NU-9D-vgG" kind="show" identifier="toAbout" id="Mdg-eQ-3Or"/>
                     </connections>
@@ -327,9 +336,9 @@ travelling experience of our travellers by providing real-time price-tag scannin
         </scene>
     </scenes>
     <resources>
-        <image name="iconcam" width="18" height="18"/>
-        <image name="iconmap" width="18" height="18"/>
-        <image name="iconmerchant" width="18" height="18"/>
+        <image name="iconcamtrans" width="12" height="12"/>
+        <image name="iconmaptrans" width="12" height="12"/>
+        <image name="iconmerchanttrans" width="12" height="12"/>
         <image name="launchscreen" width="750" height="1334"/>
     </resources>
 </document>

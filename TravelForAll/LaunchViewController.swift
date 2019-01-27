@@ -13,6 +13,7 @@ class LaunchViewController: UIViewController, UIGestureRecognizerDelegate {
   @IBOutlet weak var toMoney: UIView!
   @IBOutlet weak var toMerchants: UIView!
   @IBOutlet weak var toAbout: UIView!
+  @IBOutlet weak var toSettings: UIView!
   
   let speaker = Speaker()
   var segueTabNumber = -1
@@ -47,6 +48,13 @@ class LaunchViewController: UIViewController, UIGestureRecognizerDelegate {
     aboutGesture.delegate = self
     toAbout.addGestureRecognizer(aboutGesture)
     
+    toSettings.isOpaque = false
+    toSettings.backgroundColor = UIColor.clear
+    
+    let settingGesture = UITapGestureRecognizer(target: self, action: #selector(settingAlert))
+    settingGesture.delegate = self
+    toSettings.addGestureRecognizer(settingGesture)
+    
     // Double tap gesture recogniser
     let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
     tap.numberOfTapsRequired = 2
@@ -57,6 +65,16 @@ class LaunchViewController: UIViewController, UIGestureRecognizerDelegate {
     if !disabledMode || !activeMode { return }
     
     performSegue(withIdentifier: "segueToTab", sender: nil)
+  }
+  
+  @objc func settingAlert() {
+    let alert = UIAlertController(title: "Set Home Locale", message: "You previously set your home location is: \"London, United Kingdom\".", preferredStyle: .alert)
+    
+    alert.addAction(UIAlertAction(title: "Yes, that's correct.", style: .default, handler: nil))
+    
+    alert.addAction(UIAlertAction(title: "No, use my current location.", style: .destructive, handler: nil))
+    
+    present(alert, animated: true)
   }
   
   @objc func goToMoney() {
