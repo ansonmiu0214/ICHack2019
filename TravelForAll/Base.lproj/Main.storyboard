@@ -164,19 +164,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foU-X6-QAf">
-                                <rect key="frame" x="16" y="135" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foU-X6-QAf">
+                                <rect key="frame" x="37" y="126" width="300" height="500"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" adjustable="YES"/>
+                                </accessibility>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.94999999999999996"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="5Y5-Xb-Bys"/>
+                                </constraints>
+                                <string key="text">Eye Travel aims to assist and improves 
+travelling experience of our travellers by providing real-time price-tag scanning and currency exchange services. The  visually-impaired users. It leverages the VISA merchant search API which inform users the nearby supermarkets and convenience stores, and their location and expected queue time. </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="foU-X6-QAf" firstAttribute="firstBaseline" secondItem="m0K-Ms-P3t" secondAttribute="baseline" constant="28" symbolType="layoutAnchor" id="SSr-oc-anF"/>
+                            <constraint firstItem="foU-X6-QAf" firstAttribute="centerX" secondItem="VMJ-xp-nWI" secondAttribute="centerX" id="SPg-N7-IT4"/>
                             <constraint firstItem="m0K-Ms-P3t" firstAttribute="top" secondItem="KzH-ZT-y1Q" secondAttribute="top" id="W8R-dt-F15"/>
-                            <constraint firstItem="foU-X6-QAf" firstAttribute="leading" secondItem="KzH-ZT-y1Q" secondAttribute="leading" constant="16" id="cbZ-84-Hho"/>
                             <constraint firstItem="m0K-Ms-P3t" firstAttribute="leading" secondItem="KzH-ZT-y1Q" secondAttribute="leading" constant="16" id="jM6-4l-C5b"/>
+                            <constraint firstItem="foU-X6-QAf" firstAttribute="top" secondItem="m0K-Ms-P3t" secondAttribute="bottom" constant="8" symbolic="YES" id="sZi-c8-Tb6"/>
+                            <constraint firstItem="foU-X6-QAf" firstAttribute="leading" secondItem="KzH-ZT-y1Q" secondAttribute="leading" constant="37" id="wV0-am-gNh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KzH-ZT-y1Q"/>
                     </view>

@@ -16,11 +16,14 @@ class AboutController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    paragraphs.frame = CGRect(x: 0,y: 0,width: 300,height: 500);
     paragraphs.lineBreakMode = .byWordWrapping
+    paragraphs.textAlignment = .center
+    paragraphs.numberOfLines = 10
+    paragraphs.text = "Eye Travel is a native iOS application that leverages on-device price and object recognition, making it possible for users to get real-time currency exchange calculation, simply by pointing the camera to the price tag. The app also makes uses of various VISA APIs, such as the Merchant Search API, and FirebaseML APIs.  iOS text to speech service and other interactive were used to make the app accessible by the visually impaired ones."
     
-    paragraphs.text = "Travelling can be tedious, for instance, having to calculate the exchange rate every time you go shopping and not knowing where to get your necessity, etc. Imagine travelling as a visually impaired or blind person- these tiny inconveniences could turn into huge stepping stones easily." +
-    "Eye Travel aims to assist and improves travelling experience of our travellers by providing real-time price-tag scanning and currency exchange services. The  visually-impaired users. It leverages the VISA merchant search API which inform users the nearby supermarkets and convenience stores, and their location and expected queue time. "
-  }
-  
+
+    
+    }
+
 }
